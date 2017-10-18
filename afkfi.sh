@@ -12,8 +12,9 @@ SINKINPUT=$(pacmd list-sink-inputs | grep 'index:' | sed 's/\s*index: //' | sed 
 [ -z "$SINKINPUT" ] && { echo "Failed to retrieve sink input index."; exit 1; }
 
 SINK=$(pacmd list-sink-inputs | grep 'sink:' | sed 's/\s*sink: //' | cut -d'<' -f1 | sed $(pacmd list-sink-inputs | grep 'application.process.binary =' | grep -n 'application.process.binary = "java"' | cut -d: -f1)'q;d')
+[ -z "$SINK" ] && { echo "Failed to retrieve sink index."; exit 1; }
 
-pactl list short sinks | grep -q afkfish || (pactl load-module module-combine-sink slaves="$SINK" sink_name=afkfish sink_properties=device.description="afkfi.sh" && pactl move-sink-input "$SINKINPUT" afkfish)
+pactl list short sinks | grep -q afkfish || (pactl load-module module-combine-sink slaves="$SINK" sink_name=afkfish sink_properties=device.description="afkfi.sh" >/dev/null && pactl move-sink-input "$SINKINPUT" afkfish)
 
 xdotool windowactivate --sync "$WID" && xdotool key --window "$WID" Escape && sleep 0.5 && xdotool click --window "$WID" 3
 
