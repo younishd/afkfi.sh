@@ -22,7 +22,7 @@ while :; do
     PEAK=$(parec -d afkfish.monitor --channels=1 --latency=2 2>/dev/null | od -N2 -td2 | head -n1 | cut -d' ' -f2- | tr -d ' ')
     if [ "$PEAK" -ge 100 -o "$PEAK" -le -100 ]; then
         echo "Blub blub blub...oo0O"
-        xdotool click --window "$WID" --repeat 2 --delay 1000 3 && sleep 1
+        xdotool windowactivate --sync "$WID" && xdotool click --window "$WID" --repeat 2 --delay 1000 3 && sleep 1
         sleep 0.1
     else
         echo "Zzzz..."
