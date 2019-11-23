@@ -2,6 +2,10 @@
 
 afk fishing script for Minecraft
 
+## Demo
+
+[Here.](https://www.youtube.com/watch?v=1_SmYWm5l8Y)
+
 ## Prerequisites
 
 0. Make sure you're running PulseAudio and Xorg.
